@@ -146,7 +146,7 @@ section{
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  flex-basis: 5%;
+  /* flex-basis: 5%; */
   background-color: #ddd;
 }
 .comment-text{
@@ -185,4 +185,12 @@ section{
   background-color: transparent;
   color: blue;
   font-size: 24px;
+}
+.reply-comment{
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+.comment-reply-body{
+  width: 100%;
 }

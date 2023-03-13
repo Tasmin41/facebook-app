@@ -14,6 +14,14 @@ const initialPosts = {
                     postId:1,
                     commentId:1,
                     body:"post id 1 comment",
+                    reply:[
+                        {
+                            postId:1,
+                            commentId:1,
+                            replyId:1,
+                            replyBody:"comment 1 replied"
+                        }
+                    ]
 
                 }
             ]
@@ -29,6 +37,14 @@ const initialPosts = {
                 postId:2,
                 commentId:2,
                 body:"post id 2 comment",
+                reply:[
+                    {
+                        postId:2,
+                        commentId:2,
+                        replyId:2,
+                        replyBody:"comment 2 replied"
+                    }
+                ]
 
             }
         ]
