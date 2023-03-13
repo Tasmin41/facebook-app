@@ -9,9 +9,9 @@ import {reactCountIncrementAction ,reactCountDeccrementAction} from './PostSlice
 const SinglePost = (props) => {
     const {id,postDesc,reactCount,disabled,comments}=props.post;
 
-  const postId = comments[0].postId;
-  const commentId = comments[0].commentId;
-  const body = comments[0].body;
+  // const postId = comments[id].postId;
+  // const commentId = comments[id].commentId;
+  // const body = comments[id].body;
   
 
     const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const SinglePost = (props) => {
                     Comment
                   </button>
                   </div>
-                  <Comments comment={{postId,commentId,body}} />
+                  <Comments comment={comments} postId={id} />
                 </div> 
             </div>
     </div>

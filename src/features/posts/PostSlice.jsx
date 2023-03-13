@@ -89,7 +89,7 @@ const PostSlice = createSlice({
             const {postId,commentId,body} = commentInfo;
             const isPostExit= state.posts.filter((post)=>post.id === postId)
 
-            console.log(isPostExit);
+            isPostExit[0].comments.push(commentInfo)
         }
 
 

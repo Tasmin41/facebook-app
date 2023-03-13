@@ -3,10 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { commentAddAction } from './PostSlice';
 import { v4 as uuidv4 } from 'uuid';
+import SingleComment from './SingleComment';
 
 
 const Comments = (props) => {
-    const {postId,comentId,body}=props.comment;
+    // console.log(props.comment)
+    // const {postId,comentId,body}=props.comment;
+    const postId = props.postId;
     
     const [comment,setComment] =useState("");
 
@@ -19,7 +22,8 @@ const Comments = (props) => {
 
         const commentInfo= {postId:postId,comentId:uuidv4(),body:comment}
         
-        dispatch(commentAddAction(commentInfo))
+        dispatch(commentAddAction(commentInfo));
+        setComment("")
         
     }
   return (
@@ -34,16 +38,11 @@ const Comments = (props) => {
                 <button className='comment-submit' type='submit'>submit</button>
              </form>
             <div className='comment-show'>
-                 <div className='single-comment'>
-                 <span className='profile '>
-
-                    </span>
-                    <div className="comment-body">
-                        <p className='comment-text'>{body}</p>
-                        <button className='comment-btn'>Like</button>
-                        <button className='comment-btn'>Reply</button>
-                    </div>
-                 </div>
+                {
+                    props.comment.map((singleComment)=>{
+                        return <SingleComment singleComment = {singleComment} key={singleComment.comentId}/>
+                    })
+                }
             </div>
         </div>
     </div>

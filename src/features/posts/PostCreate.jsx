@@ -20,7 +20,7 @@ const showModal = () => {
 };
 const handleOk = (e) => {
   e.preventDefault();
-  const newPost = {id:noOfPost + 1,postDesc:post,reactCount:0,disabled:false}
+  const newPost = {id:noOfPost + 1,postDesc:post,reactCount:0,disabled:false,comments:[]}
   dispatch(createPost(newPost));
   setPost("")
   setIsModalOpen(false);

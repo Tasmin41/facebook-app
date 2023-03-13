@@ -7,14 +7,15 @@ import SinglePost from './SinglePost';
 
 const PostView = () => {
     const posts = useSelector((state)=>state.PostReducer.posts);
+
     
   return (
     <div className='post-view'>
 
       {
-        posts && posts.map((post)=>{
+        posts && posts.map((post,index)=>{
             return (
-              <SinglePost post ={post}/>
+              <SinglePost post ={post} key={index}/>
 
             )
         })
