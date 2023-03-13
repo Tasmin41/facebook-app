@@ -35,12 +35,14 @@ const SinglePost = (props) => {
                   <PostEditModal post={props.post}/>
                 </div>
                 <div className='react-view'>
-                <div className="count-view">
-                  <span className='clr-like' >
-                      <i className="fa fa-regular fa-thumbs-up"></i>
-                  </span>
-                  <p>{reactCount} </p>
-                  </div>
+                  {
+                    reactCount > 0 &&   <div className="count-view">
+                    <span className='clr-like' >
+                        <i className="fa fa-regular fa-thumbs-up"></i>
+                    </span>
+                    <p>{reactCount} </p>
+                    </div>
+                  }
                  
                   <div className='post-bottom'>
                   <button className='react-btn' onClick={()=>handleReactCount(id)} style={disabled ? {color:'blue'} : {color:'#67656B'}}>

@@ -13,7 +13,8 @@ const initialPosts = {
                 {
                     postId:1,
                     commentId:1,
-                    body:"post id 1 comment"
+                    body:"post id 1 comment",
+
                 }
             ]
             
@@ -24,9 +25,11 @@ const initialPosts = {
         reactCount:0,
         disabled:false,
         comments:[
-            {postId:2,
+            {
+                postId:2,
                 commentId:2,
-                body:"post id 2 comment"
+                body:"post id 2 comment",
+
             }
         ]
        

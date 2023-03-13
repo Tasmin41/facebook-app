@@ -34,8 +34,13 @@ const Comments = (props) => {
                  placeholder='Write a comment....' 
                  className='comment-input'
                  value={comment}
-                 onChange={(e)=>setComment(e.target.value)}/> 
-                <button className='comment-submit' type='submit'>submit</button>
+                 onChange={(e)=>setComment(e.target.value)} required/> 
+                {
+                    comment && 
+                    <button className='comment-submit' type='submit'>
+                        <i className='fa fa-solid fa-paper-plane'></i>
+                    </button>
+                }
              </form>
             <div className='comment-show'>
                 {

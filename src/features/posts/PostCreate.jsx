@@ -44,7 +44,7 @@ const handleCancel = () => {
          placeholder='Whats On Your Mind'
           className='form-field'
            onChange={(e)=>setPost(e.target.value)}
-           value={post}/>
+           value={post} required/>
       </form>
     </Modal>
   </>
