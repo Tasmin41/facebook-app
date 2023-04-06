@@ -2,32 +2,44 @@ import React,{useState} from 'react'
 import { Input, Modal } from 'antd';
 import { deletePostAction, editPostAction } from './PostSlice';
 import { useDispatch } from 'react-redux';
+import { viewPosts } from './PostSlice';
 
 const PostEditModal = (props) => {
-  const {id,postDesc,reactCount,disabled}=props.post;
+  const {id,post_desc}=props.post;
 
   const [openEditModal,setOpenEditModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  
+
   const dispatch =useDispatch();
 
-  const [postEdit,setNewPostEdit] = useState(postDesc);
+  const [postEdit,setNewPostEdit] = useState(post_desc);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
-  /*Edit Post*/
-const showModal = () => {
- 
-  setIsModalOpen(true);
-  
-};
 const handleOk = (e) => {
   e.preventDefault();
-  const editPost = {...props.post,id:id,postDesc:postEdit}
-  dispatch(editPostAction(editPost));
-  // setPost("")
+
+  fetch("http://localhost:3333/tests/"+id,{
+    method: 'post',
+    body: JSON.stringify({
+      post_desc:postEdit
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+  fetch("http://localhost:3333/tests")
+  .then((res)=>res.json())
+  .then((data)=> dispatch(viewPosts(data))) 
+
   setIsModalOpen(false);
   setOpenEditModal(false)
-  
 };
+
+
 const handleCancel = () => {
   setIsModalOpen(false);
   setOpenEditModal(false)
@@ -40,9 +52,20 @@ const handleCancel = () => {
   const handlePostModal=()=>{
       setOpenEditModal(true)
   }
+
+  
 /*Delete Post*/
-  const deletePost =(id)=>{
-    dispatch(deletePostAction(id));
+  const deletePost = async (id)=>{
+    fetch("http://localhost:3333/tests/"+id, {
+      method: 'DELETE',
+    });
+    setIsModalOpen(false);
+    setOpenEditModal(false);
+
+
+    const response = await fetch("http://localhost:3333/tests")
+    const data = await response.json();
+    dispatch(viewPosts(data))
 
   }
   return (
@@ -58,7 +81,6 @@ const handleCancel = () => {
                       </button>
                       }
                       
-
                       {
                         openEditModal && 
                         
@@ -80,8 +102,7 @@ const handleCancel = () => {
                           </ul>
                         </div>
                       }
-
-                  </div>
+                </div>
     </div>
   )
 }

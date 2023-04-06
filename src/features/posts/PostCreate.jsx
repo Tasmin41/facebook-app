@@ -3,9 +3,10 @@ import React,{useState} from 'react';
 import { Input, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createPost } from './PostSlice';
+import { createPost, viewPosts } from './PostSlice';
+import PostView from './PostView';
 
-const PostCreate = () => {
+const PostCreate = (props) => {
 
   const [post,setPost] =useState("");
 
@@ -20,16 +21,23 @@ const showModal = () => {
 };
 const handleOk = (e) => {
   e.preventDefault();
-  const newPost = {id:noOfPost + 1,postDesc:post,reactCount:0,disabled:false,comments:[]}
-  dispatch(createPost(newPost));
+  fetch('http://localhost:3333/tests', {
+    method: 'POST',
+    body: JSON.stringify({user_id:3,post_desc:post,disabled:false}),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+
+  fetch("http://localhost:3333/tests")
+  .then((res)=>res.json())
+  .then((data)=> dispatch(viewPosts(data)))  
   setPost("")
   setIsModalOpen(false);
 };
 const handleCancel = () => {
   setIsModalOpen(false);
 };
-
-
   return (
     <>
     <div className='create-post'>
