@@ -12,16 +12,13 @@ const PostCreate = (props) => {
 
   const dispatch = useDispatch();
 
-  const noOfPost = useSelector((state)=>state.PostReducer.posts.length);
-
-
 const [isModalOpen, setIsModalOpen] = useState(false);
 const showModal = () => {
   setIsModalOpen(true);
 };
 const handleOk = (e) => {
   e.preventDefault();
-  fetch('http://localhost:3333/tests', {
+  fetch('http://localhost:3333/posts', {
     method: 'POST',
     body: JSON.stringify({user_id:3,post_desc:post,disabled:false}),
     headers: {
@@ -29,7 +26,7 @@ const handleOk = (e) => {
     },
   })
 
-  fetch("http://localhost:3333/tests")
+  fetch("http://localhost:3333/posts")
   .then((res)=>res.json())
   .then((data)=> dispatch(viewPosts(data)))  
   setPost("")

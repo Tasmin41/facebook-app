@@ -5,20 +5,17 @@ import { openEditModal, reactCount, viewPosts } from './PostSlice';
 import SinglePost from './SinglePost';
 import { createPost } from './PostSlice';
 import axios from 'axios';
+import { useContext } from 'react';
+import { DataContext } from '../../api/context';
+import { fetchData } from '../../api/api';
 
 
 const PostView = () => {
     const posts = useSelector((state)=>state.PostReducer.posts);
-console.log(posts)
+    const data = useContext(DataContext);
     const dispatch = useDispatch();
-    useEffect(() => {
-      fetch("http://localhost:3333/tests")
-      .then((res)=>res.json())
-      .then((data)=>dispatch(viewPosts(data)))//data.map((post)=>dispatch(createPost(post))
-      
-    }, [])
+    dispatch(viewPosts(data))
     
-
   return (
     <div className='post-view'>
       {

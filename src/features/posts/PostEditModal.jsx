@@ -22,7 +22,7 @@ const PostEditModal = (props) => {
 const handleOk = (e) => {
   e.preventDefault();
 
-  fetch("http://localhost:3333/tests/"+id,{
+  fetch("http://localhost:3333/posts/"+id,{
     method: 'post',
     body: JSON.stringify({
       post_desc:postEdit
@@ -31,7 +31,7 @@ const handleOk = (e) => {
       'Content-type': 'application/json; charset=UTF-8',
     },
   })
-  fetch("http://localhost:3333/tests")
+  fetch("http://localhost:3333/posts")
   .then((res)=>res.json())
   .then((data)=> dispatch(viewPosts(data))) 
 
@@ -56,14 +56,14 @@ const handleCancel = () => {
   
 /*Delete Post*/
   const deletePost = async (id)=>{
-    fetch("http://localhost:3333/tests/"+id, {
+    fetch("http://localhost:3333/posts/"+id, {
       method: 'DELETE',
     });
     setIsModalOpen(false);
     setOpenEditModal(false);
 
 
-    const response = await fetch("http://localhost:3333/tests")
+    const response = await fetch("http://localhost:3333/posts")
     const data = await response.json();
     dispatch(viewPosts(data))
 

@@ -28,7 +28,7 @@ const Comments = (props) => {
             },
           })
         
-          fetch("http://localhost:3333/tests")
+          fetch("http://localhost:3333/posts")
           .then((res)=>res.json())
           .then((data)=> console.log(data))  
 

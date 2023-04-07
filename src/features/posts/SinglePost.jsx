@@ -12,7 +12,6 @@ import {reactCountIncrementAction ,reactCountDeccrementAction} from './PostSlice
 const SinglePost = (props) => {
     const {id,post_desc,reacts,disabled,comments}=props.post;
 
-
   const [react,setReact] = useState(reacts.length > 0 ? reacts[0].total_react : 0)
 
   const [disabledVal,setDisabledVal] = useState(disabled)
