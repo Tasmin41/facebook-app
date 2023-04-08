@@ -28,14 +28,6 @@ const creatPost = await fetch("http://localhost:3333/posts", {
 })
 console.log(creatPost,"create post")
 
-  // fetch("http://localhost:3333/posts")
-  // .then((res)=>{
-  //   console.log('res',res.json())
-  // })
-  // .then((data)=> {
-  //   dispatch(viewPosts(data))
-  //   console.log(data,'data')
-  // })  
 
   const response = await fetch("http://localhost:3333/posts")
   const data = await response.json();

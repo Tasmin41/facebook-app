@@ -1,32 +1,31 @@
 import React,{useState} from 'react'
 
-import { useDispatch, useSelector } from 'react-redux';
+
 import Comments from './Comments';
 import PostEditModal from './PostEditModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee, faMessage } from '@fortawesome/free-solid-svg-icons'
+import { faMessage } from '@fortawesome/free-solid-svg-icons'
 
+const reactURL="http://localhost:3333/reacts"
 
-import {reactCountIncrementAction ,reactCountDeccrementAction} from './PostSlice';
 
 const SinglePost = (props) => {
+
     const {id,post_desc,reacts,disabled,comments}=props.post;
-
-  const [react,setReact] = useState(reacts.length > 0 ? reacts[0].total_react : 0)
-
-  const [disabledVal,setDisabledVal] = useState(disabled)
+    const [react,setReact] = useState(reacts.length > 0 ? reacts[0].total_react : 0)
+    const [disabledVal,setDisabledVal] = useState(disabled)
 
 
-  const dispatch = useDispatch();
+
 
     const handleReactCount=(id)=>{
 
       if(reacts.length > 0){
-        if(disabledVal == 0){
+        if(disabledVal === 0){
           setReact(react + 1)
           setDisabledVal(disabledVal+1)
     
-          fetch("http://localhost:3333/reacts/"+id,{
+          fetch(`${reactURL}/${id}`,{
             method: 'POST',
             body: JSON.stringify({total_react:react+1}),
             headers: {
@@ -37,7 +36,7 @@ const SinglePost = (props) => {
       else{
         setReact(react - 1)
         setDisabledVal(disabledVal - 1)
-        fetch("http://localhost:3333/reacts/"+id,{
+        fetch(`${reactURL}/${id}`,{
           method: 'POST',
           body: JSON.stringify({total_react:react-1}),
           headers: {
@@ -46,12 +45,12 @@ const SinglePost = (props) => {
         })
       }
       }
-      else if(reacts.length == 0){
-        if(disabledVal == 0){
+      else if(reacts.length === 0){
+        if(disabledVal === 0){
           setReact(react + 1)
           setDisabledVal(disabledVal+1)
     
-        fetch('http://localhost:3333/reacts', {
+        fetch(reactURL, {
           method: 'POST',
           body: JSON.stringify({post_id:id,total_react:react+1}),
           headers: {
@@ -62,7 +61,7 @@ const SinglePost = (props) => {
       else{
         setReact(react - 1)
         setDisabledVal(disabledVal - 1)
-        fetch("http://localhost:3333/reacts/"+id,{
+        fetch(`${reactURL}/${id}`,{
           method: 'POST',
           body: JSON.stringify({total_react:react-1}),
           headers: {

@@ -15,9 +15,9 @@ const AddReplyComment = (props) => {
     const dispatch = useDispatch();
 
 
-    const handleReplySubmit = (e)=>{
+    const handleReplySubmit = async(e)=>{
         e.preventDefault();
-        fetch('http://localhost:3333/replies', {
+        const fetchReply=await fetch('http://localhost:3333/replies', {
           method: 'POST',
           body: JSON.stringify({post_id:postId,comment_id:commentId,reply_text:reply}),
           headers: {

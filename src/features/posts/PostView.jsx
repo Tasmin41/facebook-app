@@ -12,17 +12,18 @@ import { fetchData } from '../../api/api';
 
 const PostView = () => {
     const posts = useSelector((state)=>state.PostReducer.posts);
-    console.log('posts',posts)
-    const dispatch = useDispatch();
-    const data = useContext(DataContext);
-
-    useEffect(async () => {
-      const response = await fetch("http://localhost:3333/posts")
-      const data = await response.json();
-      console.log(data)
-      dispatch(viewPosts(data))
-    }, [])
+   const data = useContext(DataContext); const dispatch = useDispatch();
     
+
+    useEffect(() => {
+      async function fetchData() {
+        const response = await fetch("http://localhost:3333/posts")
+        const data = await response.json();
+        dispatch(viewPosts(data))
+      }
+      fetchData();
+    })
+
     
   return (
     <div className='post-view'>

@@ -18,9 +18,9 @@ const Comments = (props) => {
     const dispatch= useDispatch()
     
 
-    const handleCommentSubmit=(e)=>{
+    const handleCommentSubmit=async(e)=>{
         e.preventDefault();
-        fetch('http://localhost:3333/comments', {
+        const commentFetch=await fetch('http://localhost:3333/comments', {
             method: 'POST',
             body: JSON.stringify({post_id:postId,comment_text:comment}),
             headers: {
@@ -28,9 +28,9 @@ const Comments = (props) => {
             },
           })
         
-          fetch("http://localhost:3333/posts")
-          .then((res)=>res.json())
-          .then((data)=> console.log(data))  
+          const response = await fetch("http://localhost:3333/posts")
+          const data = await response.json();
+          dispatch(viewPosts(data))
 
         setComment("")
         
