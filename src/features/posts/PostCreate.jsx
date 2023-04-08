@@ -16,19 +16,31 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 const showModal = () => {
   setIsModalOpen(true);
 };
-const handleOk = (e) => {
+const handleOk = async (e) => {
   e.preventDefault();
-  fetch('http://localhost:3333/posts', {
-    method: 'POST',
-    body: JSON.stringify({user_id:3,post_desc:post,disabled:false}),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-  })
 
-  fetch("http://localhost:3333/posts")
-  .then((res)=>res.json())
-  .then((data)=> dispatch(viewPosts(data)))  
+const creatPost = await fetch("http://localhost:3333/posts", {
+  method: 'POST',
+  body: JSON.stringify({user_id:3,post_desc:post,disabled:false}),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+console.log(creatPost,"create post")
+
+  // fetch("http://localhost:3333/posts")
+  // .then((res)=>{
+  //   console.log('res',res.json())
+  // })
+  // .then((data)=> {
+  //   dispatch(viewPosts(data))
+  //   console.log(data,'data')
+  // })  
+
+  const response = await fetch("http://localhost:3333/posts")
+  const data = await response.json();
+  console.log(data)
+  dispatch(viewPosts(data))
   setPost("")
   setIsModalOpen(false);
 };

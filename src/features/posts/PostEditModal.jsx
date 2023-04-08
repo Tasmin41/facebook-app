@@ -56,15 +56,18 @@ const handleCancel = () => {
   
 /*Delete Post*/
   const deletePost = async (id)=>{
-    fetch("http://localhost:3333/posts/"+id, {
+    const dltResponse= fetch("http://localhost:3333/posts/"+id, {
       method: 'DELETE',
     });
+    console.log(dltResponse,"delete post")
+
     setIsModalOpen(false);
     setOpenEditModal(false);
-
+  
 
     const response = await fetch("http://localhost:3333/posts")
     const data = await response.json();
+    console.log(data)
     dispatch(viewPosts(data))
 
   }
